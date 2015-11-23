@@ -26,7 +26,10 @@ Tmp_path="Tmp"
 #----------------------------------------------------------------------------#
 
 # Ensure we enter correct folder before running script
-cd /opt/server-setup
+# we dont use this in development mode.
+if [ -f /opt/server-setup/server-setup ]; then
+   cd /opt/server-setup
+fi
 
 # Basicly we load the core here.
 # its pretty simple script whit afew
