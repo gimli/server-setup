@@ -13,7 +13,7 @@
 EnableOpenVPN() {
 
   apt-get update
-  apt-get install openvpn easy-rsa
+  apt-get -y install openvpn easy-rsa
 
   # this is the way to go, were cheating abit and select preconfigurated server.conf
   # gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz > /etc/openvpn/server.conf
@@ -23,8 +23,8 @@ EnableOpenVPN() {
   # sed -i 's/;push "dhcp-option DNS 208.67.220.220"/push "dhcp-option DNS 8.8.4.4"/' /etc/openvpn/server.conf
   # sed -i 's/;user noboby/user nobody/' /etc/openvpn/server.conf
   # sed -i 's/;group nogroup/group nogroup/' /etc/openvpn/server.conf
-
-  cat > /etc/openvpn/server.conf <<EOF
+  cd /etc/openvpn/
+  cat > server.conf <<EOF
 local $serverIP
 port 1194
 proto udp
@@ -70,7 +70,8 @@ EOF
   mv /etc/ufw/before.rules /etc/ufw/before.rules.back
   echo "Please enter your public network interface name here."
   read -p "Interface: " default_interface
-  cat > /etc/ufw/before.rules <<EOF
+  cd /etc/ufw
+  cat > before.rules <<EOF
 #
 # rules.before
 #
@@ -168,6 +169,7 @@ COMMIT
 EOF
 
    # Setup certs & keys
+   cd /etc/openvpn
    cp -r /usr/share/easy-rsa/ /etc/openvpn
    mkdir /etc/openvpn/easy-rsa/keys
    openssl dhparam -out /etc/openvpn/dh2048.pem 2048
@@ -210,7 +212,7 @@ EOF
 }
 
 EnableHavp() {
-   apt-get install havp
+   apt-get -y install havp
    sed -i "s/ENABLECLAMLIB false/ENABLECLAMLIB true/" /etc/havp/havp.config
    sed -i "s/RANGE false/RANGE true/" /etc/havp/havp.config
    sed -i "s/# SCANIMAGES true/SCANIMAGES false/" /etc/havp/havp.config
@@ -228,7 +230,7 @@ EnableHavp() {
 }
 
 EnableProxy() {
-   apt-get install privoxy
+   apt-get -y install privoxy
    sed -i "s/listen-address  localhost:8118/listen-address  127.0.0.1:8118/" /etc/privoxy/config
    sed -i "s/#hostname hostname.example.org/hostname $HOSTNAMEFQDN/" /etc/privoxy/config
    service privoxy restart

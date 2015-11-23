@@ -33,16 +33,10 @@ CheckRoot(){
 }
 
 SetNewHostname(){
-   # this way it will ensure ppl. whit dynamic ip's
-   # to get a correct setup of hostname/ip
-   # this will delete old/create new hostname file.
-   # i need to find a new simple way todo so
-   rm /etc/hostname
-   touch /etc/hostname
-   echo $HOSTNAMEFQDN >> /etc/hostname
-   sed -i "s|127.0.1.1|#127.0.1.1|" /etc/hosts
-   sed -i "/#127.0.1.1/ a $serverIP $HOSTNAMEFQDN $HOSTNAMESHORT" /etc/hosts
+   echo $HOSTNAMEFQDN > /etc/hostname
    /etc/init.d/hostname.sh restart
+   sed -i "/127.0.1.1/a $serverIP $HOSTNAMEFQDN  $HOSTNAMESHORT" /etc/hosts
+   sed -i "/127.0.1.1/d" /etc/hosts
 }
 
 AllowRootSSH(){
@@ -54,20 +48,13 @@ AllowRootSSH(){
 }
 
 InstallSources(){
-   ubuntu_sources="http://dl.isengard.xyz/secret_download/conf/sources.list"
-   mv /etc/apt/sources.list /etc/apt/sources.list.bak
-   wget $ubuntu_sources > /dev/null 2>&1
-   mv sources.list /etc/apt/
-   if [ -f /etc/apt/sources.list ];
-     then
-       echo -e "[DONE]"
-   else
-       # Restore old sources.list & continue script (failsafe)
-       # just in case we are unable to download new sources
-       # it should however be fine since this script only is
-       # for ubuntu server 15.04..
-       mv /etc/apt/sources.list.bak /etc/apt/sources.list
-   fi
+    # this my own privat repo
+    wget -O - -q http://apt.isengard.xyz/apt.isengard.xyz.gpg.key | apt-key add -
+    if [ -f /etc/apt/sources.list.d/isengard.list ]; then
+       echo "Sources is already installed.."
+    else
+       echo "deb http://apt.isengard.xyz/debian/ vivid main" > /etc/apt/sources.list.d/isengard.list
+    fi
 }
 
 AptUpgrade(){
@@ -78,7 +65,9 @@ AptUpgrade(){
     # generated.
     rm reboot.tmp
   else
+    echo "Updating sources.."
     apt-get -yqq update
+    echo "Upgrading system.."
     apt-get -yqq dist-upgrade
 
     # generate reboot.tmp to ensure update/dist-upgrade

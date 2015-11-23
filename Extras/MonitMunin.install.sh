@@ -20,13 +20,14 @@ EnableMonit(){
    read -p "Password: " user_password
 
    apt-get update
-   apt-get upgrade
+   apt-get -y upgrade
 
-   apt-get install monit
+   apt-get -y install monit
 
    cp /etc/monit/monitrc /etc/monit/monitrc_orig
    cat /dev/null > /etc/monit/monitrc
-   cat > /etc/monit/monitrc <<EOF
+   cd /etc/monit
+   cat > monitrc <<EOF
 set daemon 60
 set logfile syslog facility log_daemon
 set mailserver localhost
@@ -122,7 +123,7 @@ EOF
  mkdir /var/certs
  cd /var/certs
 
- cat > /var/certs/monit.cnf <<EOF
+ cat > monit.cnf <<EOF
 # create RSA certs - Server
 
 RANDFILE = ./openssl.rnd
@@ -171,20 +172,21 @@ EOF
 EnableMunin(){
 
    apt-get update
-   apt-get dist-upgrade
+   apt-get -y dist-upgrade
 
    a2enmod fcgid
-   apt-get install munin munin-node munin-plugins-extra
+   apt-get -y install munin munin-node munin-plugins-extra
 
    sed -i "s/#dbdir/dbdir/" /etc/munin/munin.conf
    sed -i "s/#htmldir/htmldir/" /etc/munin/munin.conf
    sed -i "s/#logdir/logdir/" /etc/munin/munin.conf
-   sed -i "s/#rundir/rundir" /etc/munin/munin.conf
-   sed -i "s/#tmpldir/tmpldir" /etc/munin/munin.conf
-   sed -i 's/server1.example.com/$HOSTNAMEFQDN/' /etc/munin/munin.conf
+   sed -i "s/#rundir/rundir/" /etc/munin/munin.conf
+   sed -i "s/#tmpldir/tmpldir/" /etc/munin/munin.conf
+   sed -i 's/localhost.localdomain/$HOSTNAMEFQDN/' /etc/munin/munin.conf
 
    mv /etc/munin/apache24.conf /etc/munin/apache24.conf.original
-   cat > /etc/munin/apache24.conf <<EOF
+   cd /etc/munin
+   cat > apache24.conf <<EOF
 Alias /munin /var/cache/munin/www
 <Directory /var/cache/munin/www>
  # Require local

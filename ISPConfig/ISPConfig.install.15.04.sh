@@ -7,11 +7,7 @@ SetupBasic() {
    package_install hostname
 
    #Set hostname and FQDN
-   # sed -i "s/${serverIP}.*/${serverIP} ${HOSTNAMEFQDN} ${HOSTNAMESHORT}/" /etc/hosts
-   # echo "$HOSTNAMEFQDN" > /etc/hostname
-   # /etc/init.d/hostname.sh start >/dev/null 2>&1
-
-   SetNewHostname
+   #SetNewHostname
 
    apt-get -yqq update
    apt-get -yqq upgrade
@@ -28,9 +24,12 @@ SetupBasic() {
 
 DisableApparmor() {
    # Disable apparmor
-   /etc/init.d/apparmor stop
-   update-rc.d -f apparmor remove
-   apt-get -y remove apparmor apparmor-utils
+   if [ -f /etc/init.d/apparmor ]; then
+     /etc/init.d/apparmor stop
+     update-rc.d -f apparmor remove
+     apt-get -yqq remove apparmor apparmor-utils
+     rm /etc/init.d/apparmor
+  fi
 }
 
 EnableMYSQL() {
@@ -86,9 +85,39 @@ EnableVirus() {
    # note. this will produce errors for /var/www & /var/vmail
    # on first run we will need ispconfig to be done first.
    cd /etc/clamav/
-   wget http://dl.isengard.xyz/secret_download/conf/clamscan_daily.sh
-   chmod 0755 /etc/clamav/clamscan_daily.sh
+   read -p "Please enter domain-name? " domain_name
+   read -p "Please enter your email? " user_email
+   cat > clamscan_daily.sh << EOF
+#!/bin/bash
+LOGFILE="/var/log/clamav/clamav-$(date +'%Y-%m-%d').log";
+EMAIL_MSG="Please see the log file attached.";
+EMAIL_FROM="clamav-daily@$domain_name";
+EMAIL_TO="$user_email";
+DIRTOSCAN="/var/www /var/vmail";
+
+for S in ${DIRTOSCAN}; do
+ DIRSIZE=$(du -sh "$S" 2>/dev/null | cut -f1);
+
+ echo "Starting a daily scan of "$S" directory.
+ Amount of data to be scanned is "$DIRSIZE".";
+
+ clamscan -ri "$S" >> "$LOGFILE";
+
+ # get the value of "Infected lines"
+ MALWARE=$(tail "$LOGFILE"|grep Infected|cut -d" " -f3);
+
+ # if the value is not equal to zero, send an email with the log file attached
+ if [ "$MALWARE" -ne "0" ];then
+ # using heirloom-mailx below
+ echo "$EMAIL_MSG"|mail -a "$LOGFILE" -s "Malware Found" -r "$EMAIL_FROM" "$EMAIL_TO";
+ fi
+done
+
+exit 0
+EOF
+
    ln -s /etc/clamav/clamscan_daily.sh /etc/cron.daily/clamscan_daily
+   chmod +x /etc/clamav/clamscan_daily.sh
    /etc/clamav/clamscan_daily.sh
    service clamav-daemon start
 }
@@ -105,7 +134,7 @@ EnableApache() {
    a2enmod suexec rewrite ssl actions include
    a2enmod dav_fs dav auth_digest
 
-   cp /etc/apache2/conf-available/suphp.conf /etc/apache2/conf-available/suphp.conf.backup
+   cp /etc/apache2/conf-availble/suphp.conf /etc/apache2/conf-available/suphp.conf.backup
    cat > /etc/apache2/conf-available/suphp.conf <<EOF
     <IfModule mod_suphp.c>
         #<FilesMatch "\.ph(p3?|tml)$">
@@ -190,7 +219,7 @@ EnablePureFTPD() {
    sed -i 's|UPLOADSCRIPT=|UPLOADSCRIPT=/etc/pure-ftpd/clamav_check.sh|' /etc/default/pure-ftpd-common
    cat > /etc/pure-ftpd/clamav_scan.sh <<EOF
 #!/bin/sh
-/usr/bin/clamdscan --remove --quiet --no-summary "$1"
+/usr/bin/clamdscan --remove --quiet --no-summary $1
 EOF
    chmod 755 /ect/pure-ftpd/clamav_scan.sh
 
