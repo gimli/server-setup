@@ -221,9 +221,10 @@ EnableHavp() {
    service havp restart
    tail /var/log/havp/error.log
    http_proxy=127.0.0.1:8080 wget http://www.eicar.org/download/eicar.com -O /tmp/eicar.com
-   if [ -f /tmp/eicar.com ]; then
-      echo "failed installing havp"
-   fi
+   #if [ -f /tmp/eicar.com ];
+   #  then
+   #   echo "failed installing havp"
+   #fi
 }
 
 EnableProxy() {

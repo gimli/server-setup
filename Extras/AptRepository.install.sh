@@ -48,7 +48,7 @@ EOF
   wget -O - -q http://apt.$domain_name/apt.$domain_name.gpg.key | apt-key add -
 
   # Install apache configuration not this config is for apache2.4
-  cat /etc/apache2/conf-enabled/apt.conf <<<EOF
+  cat /etc/apache2/conf-enabled/apt.conf <<EOF
 lias /apt /var/packages
 
 <VirtualHost *:80>

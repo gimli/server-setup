@@ -196,6 +196,47 @@ if [ $exitstatus = 0 ]; then
                     whiptail --backtitle "$back_title" --title "Installer" --msgbox "Install Finished. Monit/Munin is now available on you host. http://$HOSTNAMEFQDN/monit & http://$HOSTNAMEFQDN:2812. ill return to main menu" 8 78
                     # Setup Munin/Monit END
                ;;
+               3)
+                    # Setup Gitlab
+                    EnableGitlab
+                    # Setup Gitlab End
+               ;;
+               4)
+                    # Setup Mumble
+                    EnableMumble
+                    # Setup Mumble End
+               ;;
+               5)
+                    # Setup Reprepro APT Repo
+                    EnableAPTRepo
+                    # Setup Reprepro APT Repo End
+               ;;
+               6)
+                    # Setup VNC Headless
+                    EnableVNCHeadless
+                    # Setup VNC Headless End
+               ;;
+               7)
+                    # Setup UFW Firewall
+                    EnableUFW
+                    # Setup UFW END
+               ;;
+               8)
+                    # Setup Unreal IRCD & Anope Services
+                    EnableUnrealIRCD
+                    EnableAnope
+                    # Setup Unreal/Anope End
+               ;;
+               9)
+                    # Setup Roundcube Webmail
+                    EnableRoundcube
+                    # Setup Roundcube End
+               ;;
+               10)
+                    # Setup Squirrelmail Webmail
+                    EnableSquirrelmail
+                    # Setup Squirrelmail End
+               ;;
                *)
                     # Return to Main menu
                     status=0
@@ -213,6 +254,7 @@ if [ $exitstatus = 0 ]; then
                 # Exit Script.
                 whiptail --backtitle "ubuntu automated installer" --title "Installer" --msgbox "You have finished." 8 78
                 status=1
+                clear
                 exit
             ;;
         esac
@@ -222,6 +264,7 @@ if [ $exitstatus = 0 ]; then
 else
     # Close script before started.
     whiptail --backtitle "ubuntu automated installer" --title "Installer" --msgbox "You have choose to Exit installer. Script will exit." 8 78
+    clear
     exit
 fi
 }

@@ -77,7 +77,7 @@ EnableGitlab(){
   RewriteRule .* http://127.0.0.1:8080%{REQUEST_URI} [P,QSA,NE]
 
   # needed for downloading attachments
-  DocumentRoot /opt/gitlab/embedded
+  DocumentRoot /opt/gitlab/embedded/service/gitlab-rails/public
 
   #Set up apache error documents, if back end goes down (i.e. 503 error) then a maintenance/deploy page is thrown up.
   ErrorDocument 404 /404.html
