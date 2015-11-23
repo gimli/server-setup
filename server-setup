@@ -1,0 +1,63 @@
+#!/bin/bash
+# Ubuntu automated installer script, this is a simple script to help
+# you get the right setup for your server enviroment.
+# this script is build upon serval diffrent guides form all aorund
+# the interne. as for now its in development mode and should not be used
+# for any kinda setup. so fare i got whiptail running for the most of it
+# updates will follow..
+#
+#
+# Author: Nickless - Admin@isengard.dk
+#-------------------------------------------------------------------------
+
+# download your own custom sources.list
+sources_link=""
+
+# define engine path
+Core_path="Core"
+ISPConfig_path="ISPConfig"
+Extras_path="Extras"
+Tmp_path="Tmp"
+
+#----------------------------------------------------------------------------#
+#                                                                            #
+# no need to edit anything below                                             #
+#                                                                            #
+#----------------------------------------------------------------------------#
+
+# Ensure we enter correct folder before running script
+cd /root/project-UbuntuServer-installer
+
+# Basicly we load the core here.
+# its pretty simple script whit afew
+# along whit the hole menu system.
+for file in $Core_path/*.sh; do
+   source $file
+done
+
+# We need to call lsb_release to get current Distro infomartion
+# to ensure we call the right script when installing ISPConfig 3
+# this way we can ensure everybody can call the script.
+. /etc/lsb-release
+
+# this will need a distro check to
+# to ensure we use the Correct version to enable ispconfig.
+# or maybe make it as an option selected when installing ispconfig
+for file in $ISPConfig_path/*.$DISTRIB_RELEASE.sh; do
+   source $file
+done
+
+# load Extra's - various scripts that
+# can help a newbie install diffrent things
+# like OpenVPN / Munin&Monit / Mumble / Gitlab
+# and so on..
+for file in $Extras_path/*.sh; do
+   source $file
+done
+
+# is root present ?
+# if not kill script ?
+CheckRoot
+
+# Start Menu System
+EnableQuestions
