@@ -133,8 +133,8 @@ if [ $exitstatus = 0 ]; then
                # Download and install deps. for ISPConfig 3
                SetupBasic
                DisableApparmor
-               EnableApache
                EnableMySQL
+               EnableApache
                EnableDovecot
                EnableVirus
                EnableMailman
