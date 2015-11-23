@@ -29,6 +29,7 @@ Tmp_path="Tmp"
 # we dont use this in development mode.
 if [ -f /opt/server-setup/server-setup ]; then
    cd /opt/server-setup
+   git pull
 fi
 
 # Basicly we load the core here.
