@@ -182,7 +182,7 @@ EnableMunin(){
    sed -i "s/#logdir/logdir/" /etc/munin/munin.conf
    sed -i "s/#rundir/rundir/" /etc/munin/munin.conf
    sed -i "s/#tmpldir/tmpldir/" /etc/munin/munin.conf
-   sed -i 's/localhost.localdomain/$HOSTNAMEFQDN/' /etc/munin/munin.conf
+   sed -i "s/localhost.localdomain/$HOSTNAMEFQDN/" /etc/munin/munin.conf
 
    mv /etc/munin/apache24.conf /etc/munin/apache24.conf.original
    cd /etc/munin
