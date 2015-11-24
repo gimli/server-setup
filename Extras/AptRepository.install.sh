@@ -28,7 +28,7 @@ EnableAPTRepo(){
    cat > distributions <<EOF
 Origin: apt.$domain_name
 Label: apt.$domain_name
-Codename: $code_nae
+Codename: $code_name
 Architectures: i386 amd64
 Components: main
 Description: $desc
@@ -52,7 +52,7 @@ EOF
   # Install apache configuration not this config is for apache2.4
   cd /etc/apache2/conf-enabled
   cat > apt.conf <<EOF
-lias /apt /var/packages
+Alias /apt /var/packages
 
 <VirtualHost *:80>
 ServerName apt.$domain_name

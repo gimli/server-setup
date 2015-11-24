@@ -12,11 +12,12 @@
 
 EnableVNCHeadless(){
    apt-get update
-   apt-get install xfce4 xfce4-goodies tightvncserver
+   apt-get -y install xfce4 xfce4-goodies tightvncserver
    vncserver
    vncserver -kill :1
    mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
-   cat ~/.vnc/xstartup <<<EOF
+   cd ~/.vnc
+   cat > xstartup <<EOF
 #!/bin/bash
 xrdb $HOME/.Xresources
 startxfce4 &
@@ -24,7 +25,8 @@ EOF
    chmod +x ~/.vnc/xstartup
 
    # This is not a init.d script, but it will be placed in /usr/sbin
-   cat /root/vncserver <<<EOF
+   cd /root/
+   cat > vncserver <<EOF
 #!/bin/sh
 # Edit this to suit your needs
 #
@@ -136,4 +138,5 @@ EOF
    chmod +x /root/vncserver
    /root/vncserver start
    /root/vncserver status
+   vncserver
 }
