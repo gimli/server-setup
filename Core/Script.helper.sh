@@ -21,8 +21,8 @@ case $ARGS in
       rm /usr/sbin/server-setup
       exit 0
   ;;
-  *)
-      echo "Sorry i didnt understand your command, please try --help for more info."
-      exit 0
-  ;;
+  #*)
+  #    echo "Sorry i didnt understand your command, please try --help for more info."
+  #    exit 0
+  #;;
 esac
