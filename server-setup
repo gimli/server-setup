@@ -25,6 +25,9 @@ Tmp_path="Tmp"
 #                                                                            #
 #----------------------------------------------------------------------------#
 
+# Load config values created on first run.
+source config.sh
+
 # Ensure we enter correct folder before running script
 # we dont use this in development mode.
 if [ -f /opt/server-setup/server-setup ]; then
