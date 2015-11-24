@@ -139,4 +139,5 @@ EOF
    /root/vncserver start
    /root/vncserver status
    vncserver
+   echo "Server info: $serverIP:5901 and the password you created early in the process."
 }
