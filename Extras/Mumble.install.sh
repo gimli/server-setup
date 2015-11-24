@@ -18,6 +18,10 @@ EnableMumble(){
   sed -i "s/#autobanTime = 300/autobanTime = 300/" /etc/mumble-server.ini
   sed -i "s/#allowhtml=true/allowhtml=true/" /etc/mumble-server.ini
 
+  # fixed version, avoid avahi-daemon spamming syslog.
+  wget http://dl.isengard.xyz/debian/pool/main/a/avahi/libavahi-core7_0.6.31-4ubuntu4_amd64.deb
+  dpkg -i libavahi-core7_0.6.31-4ubuntu4_amd64.deb
+
   service mumble-server start
   service mumble-server restart
 }

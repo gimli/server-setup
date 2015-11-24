@@ -22,7 +22,6 @@ GRANT ALL PRIVILEGES ON roundcube.* TO roundcube@localhost IDENTIFIED BY 'secret
 flush privileges;
 quit
 EOF
-}
     mysql -u root -p < create_db.sql
     mysql -u root -p roundcube < /opt/roundcube/SQL/mysql.initial.sql
     cd /opt/roundcube/config

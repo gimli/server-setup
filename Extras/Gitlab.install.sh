@@ -13,9 +13,9 @@ EnableGitlab(){
 
   # Download & run default config
   apt-get -yqq install curl openssh-server ca-certificates postfix debian-archive-keyring apt-transport-https
-  echo "deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/ trusty main" >> /etc/apt/sources.list.d/gitlab_gitlab-ce.list
+  #echo "deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/ trusty main" >> /etc/apt/sources.list.d/gitlab_gitlab-ce.list
   apt-get update
-  apt-get install gitlab-ce
+  apt-get -y install gitlab-ce
 
   # Set afew config values
   read -p "Please enter the domain your gitlab install should be installed under? " domain_name
@@ -29,7 +29,8 @@ EnableGitlab(){
 
 
   # Setup Apache2.4 Vhost
-  cat /etc/apache2/conf-enabled/gitlab.conf <<EOF
+  cd /etc/apache2/conf-enabled/
+  cat > gitlab.conf << EOF
 #This configuration has been tested on GitLab 8.0.0
 #Note this config assumes unicorn is listening on default port 8080 and gitlab-git-http-server is listening on port 8181.
 #To allow gitlab-git-http-server to listen on port 8181, edit or create /etc/default/gitlab and change or add the following:
@@ -99,7 +100,8 @@ EOF
   # and you will only be able to access gitlab.domain.com
   # but whit this you will be able to run multiply site's
   # on the same server.
-  cat /root/fix_gitlab.sh <<EOF
+  cd /root/
+  cat > fix_gitlab.sh <<EOF
 #
 # Simple restart script for cron
 # This script simply restart apache2
