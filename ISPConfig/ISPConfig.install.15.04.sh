@@ -5,9 +5,10 @@ SetupBasic() {
    AptUpgrade
 
    package_install hostname
+   package_install landscape-common
 
    #Set hostname and FQDN
-   #SetNewHostname
+   SetNewHostname
 
    apt-get -yqq update
    apt-get -yqq upgrade
