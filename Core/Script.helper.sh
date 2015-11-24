@@ -10,14 +10,9 @@ case $ARGS in
   ;;
   --run-upgrade)
        echo "Updating script..."
-       if [ -f /opt/server-setup ]; then
-         echo "upgrading /opt/server-setup"
-         cd /opt/server-setup
-       else
-         echo "upgrading ~/server-setup"
-         cd ~/server-setup
-      fi
-     exit 0
+       cd /opt/server-setup
+       git pull
+       exit 0
   ;;
   --run-uninstall)
       echo "Uninstalling server-setup, please standby."
