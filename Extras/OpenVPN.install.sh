@@ -12,8 +12,10 @@
 
 EnableOpenVPN() {
 
-  apt-get update
-  apt-get -y install openvpn easy-rsa
+  package_update
+  package_upgrade
+  package_install openvpn
+  package_install easy-rsa
 
   # this is the way to go, were cheating abit and select preconfigurated server.conf
   # gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz > /etc/openvpn/server.conf
@@ -212,7 +214,9 @@ EOF
 }
 
 EnableHavp() {
-   apt-get -y install havp
+   package_update
+   package_upgrade
+   package_install havp
    sed -i "s/ENABLECLAMLIB false/ENABLECLAMLIB true/" /etc/havp/havp.config
    sed -i "s/RANGE false/RANGE true/" /etc/havp/havp.config
    sed -i "s/# SCANIMAGES true/SCANIMAGES false/" /etc/havp/havp.config
@@ -230,7 +234,9 @@ EnableHavp() {
 }
 
 EnableProxy() {
-   apt-get -y install privoxy
+   package_update
+   package_upgrade
+   package_install privoxy
    sed -i "s/listen-address  localhost:8118/listen-address  127.0.0.1:8118/" /etc/privoxy/config
    sed -i "s/#hostname hostname.example.org/hostname $HOSTNAMEFQDN/" /etc/privoxy/config
    service privoxy restart

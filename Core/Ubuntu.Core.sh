@@ -66,9 +66,9 @@ AptUpgrade(){
     rm reboot.tmp
   else
     echo "Updating sources.."
-    apt-get -yqq update
+    package_update
     echo "Upgrading system.."
-    apt-get -yqq dist-upgrade
+    package_upgrade
 
     # generate reboot.tmp to ensure update/dist-upgrade
     # goes as planed before installing anything new

@@ -12,10 +12,14 @@
 EnableGitlab(){
 
   # Download & run default config
-  apt-get -yqq install curl openssh-server ca-certificates postfix debian-archive-keyring apt-transport-https
-  #echo "deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/ trusty main" >> /etc/apt/sources.list.d/gitlab_gitlab-ce.list
-  apt-get update
-  apt-get -y install gitlab-ce
+  echo "deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/ trusty main" >> /etc/apt/sources.list.d/gitlab_gitlab-ce.list
+  package_update
+  package_upgrade
+  packages=("curl" "openssh-server" "ca-certificates" "postfix" "debian-archive-keyring" "apt-transport-https" "gitlab-ce")
+  for i in ${packages[@]}
+   do
+     package_install $i
+  done
 
   # Set afew config values
   read -p "Please enter the domain your gitlab install should be installed under? " domain_name

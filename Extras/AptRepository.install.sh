@@ -11,8 +11,13 @@
 #-------------------------------------------------------#
 
 EnableAPTRepo(){
-
-   apt-get install gnupg rng-tools reprepro dpkg-sig
+   package_update
+   package_upgrade
+   packages=("gnupg" "rng-tools" "reprepro" "dpkg-sig")
+   for i in ${packages[@]}
+    do
+       package_install $i
+   done
    sed -i "s|#HRNGDEVICE=/dev/hwrng|HRNGDEVICE=/dev/urandom|" /etc/default/rng-tools
    /etc/init.d/rng-tools start
    gpg --gen-key

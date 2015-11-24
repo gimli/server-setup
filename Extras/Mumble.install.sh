@@ -9,8 +9,9 @@
 
 EnableMumble(){
   add-apt-repository ppa:mumble/release
-  apt-get update
-  apt-get -yqq install mumble-server
+  package_update
+  package_upgrade
+  package_install mumble-server
   dpkg-reconfigure mumble-server
 
   sed -i "s/#autobanAttempts = 10/autobanAttempts = 10/" /etc/mumble-server.ini

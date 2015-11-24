@@ -11,8 +11,13 @@
 #--------------------------------------------------------------#
 
 EnableVNCHeadless(){
-   apt-get update
-   apt-get -y install xfce4 xfce4-goodies tightvncserver
+   package_update
+   package_upgrade
+   packages=("xfce4" "xfce4-goodies" "tightvncserver")
+   for i in "${packages[@]}"
+    do
+      package_install $i
+   done
    vncserver
    vncserver -kill :1
    mv ~/.vnc/xstartup ~/.vnc/xstartup.bak

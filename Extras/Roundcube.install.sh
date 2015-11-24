@@ -1,6 +1,8 @@
 #!/bin/bash
 
 EnableRoundcube(){
+    package_update
+    package_upgrade
     packages=("wget" "nano")
     for i in "${packages[@]}"
     do

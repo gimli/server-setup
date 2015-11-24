@@ -9,6 +9,8 @@
 #------------------------------------------------------------------#
 
 EnableUFW(){
+   package_update
+   package_upgrade
    package_install ufw
    read -p "Enable default ISPConfig 3 ports? (y/n) " default_ports
    read -p "Please enter ISPConfig 3 port? [8080] " ispc_port
@@ -43,5 +45,6 @@ EnableUFW(){
    if [ $ircd = "y" ]; then
      ufw allow 6667/tcp
    fi
+   echo "Enabling firewall.."
    ufw enable
 }

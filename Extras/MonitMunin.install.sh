@@ -19,10 +19,9 @@ EnableMonit(){
    read -p "Username: " user_name
    read -p "Password: " user_password
 
-   apt-get update
-   apt-get -y upgrade
-
-   apt-get -y install monit
+   package_update
+   package_upgrade
+   package_install monit
 
    cp /etc/monit/monitrc /etc/monit/monitrc_orig
    cat /dev/null > /etc/monit/monitrc
@@ -171,11 +170,15 @@ EOF
 
 EnableMunin(){
 
-   apt-get update
-   apt-get -y dist-upgrade
+   package_update
+   package_upgrade
 
    a2enmod fcgid
-   apt-get -y install munin munin-node munin-plugins-extra
+   packages=("munin" "munin-node" "munin-plugins-extra")
+   for i in ${packages[@]}
+    do
+      package_install $i
+   done
 
    sed -i "s/#dbdir/dbdir/" /etc/munin/munin.conf
    sed -i "s/#htmldir/htmldir/" /etc/munin/munin.conf
