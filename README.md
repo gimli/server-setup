@@ -7,7 +7,7 @@ Supports: Ubuntu Server 15.04
 
 Download:
 - wget -O - -q http://apt.isengard.xyz/apt.isengard.xyz.gpg.key | apt-key add -
-- echo "deb http://apt.isengard.dk/debian/ vivid main" > /etc/apt/sources.list.d/isengard.list
+- echo "deb http://apt.isengard.xyz/debian/ vivid main" > /etc/apt/sources.list.d/isengard.list
 - apt-get update
 - apt-get install server-setup
 
