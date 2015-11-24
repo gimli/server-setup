@@ -81,7 +81,7 @@ if [ $exitstatus = 0 ]; then
         # called upon first run of this script..
         # also we dont store anything whitin this script, meaning that your password will
         # reset whitin the script upon quit
-        if [ ! /var/run/mysqld/mysqld.pid ]; then
+        #if [ ! /var/run/mysqld/mysqld.pid ]; then
          PASSWORD=$(whiptail --passwordbox "please enter your mysql root password" 8 78 --title "MySQL Root Password" 3>&1 1>&2 2>&3)
          exitstatus=$?
          if [ $exitstatus = 0 ]; then
@@ -89,12 +89,12 @@ if [ $exitstatus = 0 ]; then
          else
             mysql_pass=""
           fi
-        else
+        #else
             # MySQL-Server is already running, we dont need password unless asked for.
             # this function is really not needed and will be removed later on.
-            mysql_pid=`cat /var/run/mysqld/mysqld.pid`
-            whiptail --backtitle "$back_title" --title "Installer" --msgbox "MySQL Server is running (pid $mysql_pid.), The script will continue but may ask for your mysql root password later if needed." 8 78
-        fi
+        #    mysql_pid=`cat /var/run/mysqld/mysqld.pid`
+        #    whiptail --backtitle "$back_title" --title "Installer" --msgbox "MySQL Server is running (pid $mysql_pid.), The script will continue but may ask for your mysql root password later if needed." 8 78
+        #fi
 
         # Only collect information once while script is running
         collect_info=1
