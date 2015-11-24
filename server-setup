@@ -30,7 +30,17 @@ Tmp_path="Tmp"
 if [ -f /opt/server-setup/server-setup ]; then
    cd /opt/server-setup
    git pull
+   if [ -f reboot.tmp ]; then
+     echo "your system need to reboot, before script can continue."
+     echo "if you know what your doing then: rm /opt/server-setup/reboot.tmp"
+     echo "and run script again."
+     exit 0
+  fi
 fi
+
+# check for appending commands.
+# like --help or --run-upgrade / --run-uninstall
+ARGS=$1
 
 # Basicly we load the core here.
 # its pretty simple script whit afew
