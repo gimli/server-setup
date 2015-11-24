@@ -1,7 +1,7 @@
 # Ubuntu Automated Server-setup
 
-This script is mainly for my vps users, to help the setup a brand new ubuntu 15.04 server.
-also i kinda got tired of setting up server.
+This script is mainly for my vps users, to help them setup a brand new ubuntu 15.04 server.
+also i kinda got tired of setting up servers.
 
 Supports: Ubuntu Server 15.04
 
