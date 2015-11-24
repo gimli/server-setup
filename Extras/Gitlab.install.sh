@@ -101,7 +101,7 @@ EOF
   # but whit this you will be able to run multiply site's
   # on the same server.
   cd /root/
-  cat > fix_gitlab.sh <<EOF
+  cat > fix_gitlab.sh << EOF
 #
 # Simple restart script for cron
 # This script simply restart apache2
