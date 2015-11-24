@@ -5,14 +5,20 @@ also i kinda got tired of setting up servers.
 
 Supports: Ubuntu Server 15.04
 
+this script needs you to be root for the script to work proberly.
+
 Download:
-- wget -O - -q http://apt.isengard.xyz/apt.isengard.xyz.gpg.key | apt-key add -
-- echo "deb http://apt.isengard.xyz/debian/ vivid main" > /etc/apt/sources.list.d/isengard.list
-- apt-get update
-- apt-get install server-setup
+- this will install the script into /opt/server-setup
+- $: wget -O - -q http://apt.isengard.xyz/apt.isengard.xyz.gpg.key | apt-key add -
+- $: echo "deb http://apt.isengard.xyz/debian/ vivid main" > /etc/apt/sources.list.d/isengard.list
+- $: apt-get update
+- $: apt-get install server-setup
+- $: server-setup --run-upgrade;server-setup
 
 Or:
-- git clone https://github.com/gimli/server-setup.git
+- $: git clone https://github.com/gimli/server-setup.git
+- $: ln -s /path_to/server-setup/server-setup /usr/sbin/server-setup
+- $: server-setup --run-upgrade;server-setup
 
 and simply run: server-setup or/an server-setup --help.
 ill keep working on this when i have time and perhaps in the future,
