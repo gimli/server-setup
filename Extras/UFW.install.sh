@@ -9,7 +9,7 @@
 #------------------------------------------------------------------#
 
 EnableUFW(){
-   apt-get install ufw
+   package_install ufw
    read -p "Enable default ISPConfig 3 ports? (y/n) " default_ports
    read -p "Please enter ISPConfig 3 port? [8080] " ispc_port
 
@@ -18,8 +18,9 @@ EnableUFW(){
       ispc_port=8080
    fi
 
-   PORTS=("21/tcp" "22/tcp" "23/tcp" "25/tcp" "53/tcp" "53/udp" "80/tcp" "$ispc_port" "110/tcp" "143/tcp" "443/tcp" "456/tcp" "587/tcp" "993/tcp" "995/tcp" "3306/tcp" "8081/tcp")
-   for i in $PORTS; do
+   PORTS=("21/tcp" "22/tcp" "23/tcp" "25/tcp" "53/tcp" "53/udp" "80/tcp" "$ispc_port/tcp" "110/tcp" "143/tcp" "443/tcp" "456/tcp" "587/tcp" "993/tcp" "995/tcp" "3306/tcp" "8081/tcp")
+   for i in ${PORTS[@]} 
+   do
       ufw allow $i
    done
 
