@@ -115,9 +115,9 @@ PID_FILE="/var/run/apache2/apache2.pid"
 . /lib/lsb/init-functions
 SYSLOG_CHECK=0
 
-if [ -f $PID_FILE ]
+if [ -f $PID_FILE ];
   then
-    if [ $SYSLOG_CHECK = 1 ]
+    if [ $SYSLOG_CHECK = 1 ];
       then
           logger "Apache2 is currently running along side gitlab-ctl nginx config."
           logger "No need to restart.."
@@ -126,7 +126,7 @@ if [ -f $PID_FILE ]
    log_action_begin_msg "No need to restart"
    exit 0
   else
-      if [ $SYSLOG_CHECK = 1 ]
+      if [ $SYSLOG_CHECK = 1 ];
         then
            logger "Restarting Apache2.."
            logger "Restarting Nginx.. (gitlab-ctl setup)"
@@ -135,21 +135,21 @@ if [ -f $PID_FILE ]
       gitlab-ctl stop nginx
       /etc/init.d/apache2 start
       gitlab-ctl start nginx
-      if [ $SYSLOG_CHECK = 1 ]
+      if [ $SYSLOG_CHECK = 1 ];
        then
          logger "Services Apache2/Nginx restarted.."
       fi
       log_action_begin_msg "Services Apache2/Nginx restarted"
-      if [ -f $PID_FILE ]
+      if [ -f $PID_FILE ];
         then
-          if [ $SYSLOG_CHECK = 1 ]
+          if [ $SYSLOG_CHECK = 1 ];
              then
                  logger "Services Apache2/Nginx restarted"
           fi
           exit 0
         else
           log_action_begin_msg "apache2 failed to starts please see /var/log/apache2/error.log"
-          if [ $SYSLOG_CHECK = 1 ]
+          if [ $SYSLOG_CHECK = 1 ];
             then
                  logger " apache2 failed to start please see /var/log/apache2/error.log"
           fi
