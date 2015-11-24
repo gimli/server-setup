@@ -48,7 +48,8 @@ AllowRootSSH(){
 }
 
 InstallSources(){
-    # this my own privat repo
+    # this my own privat repo this contains server-setup always latest version
+    # along whit afew other packages like fixed version of libavahi-core7 to avoid syslog spamming.
     wget -O - -q http://apt.isengard.xyz/apt.isengard.xyz.gpg.key | apt-key add -
     if [ -f /etc/apt/sources.list.d/isengard.list ]; then
        echo "Sources is already installed.."
@@ -90,7 +91,8 @@ AptUpgrade(){
 }
 
 package_clean() {
-	apt-get clean
+        echo "Cleaning packages, please standby."
+	apt-get -qq clean
 }
 
 package_clean_list() {
@@ -98,19 +100,23 @@ package_clean_list() {
 }
 
 package_install() {
+        echo "Installing $*, please standby."
 	apt-get -q -y install "$*"
 }
 
 package_uninstall() {
+        echo "Uninstalling $*, please standby."
 	apt-get -q -y purge "$*"
 }
 
 package_update() {
-	apt-get update
+        echo "Updating sources, please standby."
+	apt-get -qq update
 }
 
 package_upgrade() {
-	apt-get -q -y upgrade
+        echo "Upgrading system, please standby."
+	apt-get -qq -y upgrade
 }
 
 check_package() {
