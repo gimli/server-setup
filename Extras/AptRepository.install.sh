@@ -24,7 +24,8 @@ EnableAPTRepo(){
    read -p "Please enter your distribution? : " code_name
    read -p "Please enter a repo desc? : " desc
    read -p "Please enter your public key? : " key
-   cat /var/packages/debian/conf/distributions <<<EOF
+   cd /var/packages/debian/conf
+   cat > distributions <<EOF
 Origin: apt.$domain_name
 Label: apt.$domain_name
 Codename: $code_nae
@@ -37,7 +38,8 @@ DscOverride: override.$code_name
 EOF
 
   touch /var/packages/debian/conf/override.$code_name
-  cat /var/packages/debian/conf/options <<<EOF
+  cd /var/packages/debian/conf/
+  cat > options <<EOF
 verbose
 ask-passphrase
 basedir /var/packages/debian
@@ -48,7 +50,8 @@ EOF
   wget -O - -q http://apt.$domain_name/apt.$domain_name.gpg.key | apt-key add -
 
   # Install apache configuration not this config is for apache2.4
-  cat /etc/apache2/conf-enabled/apt.conf <<EOF
+  cd /etc/apache2/conf-enabled
+  cat > apt.conf <<EOF
 lias /apt /var/packages
 
 <VirtualHost *:80>
@@ -68,11 +71,13 @@ EOF
   echo "Please put one or serval .debs in /root/repo, before updating public repo."
   read DUMMY
 
+  # call reprepro and update /root/repo
   cd /var/packages/debian
   reprepro includedeb $code_name /root/repo/*.deb
   reprepro -Vb . export
 
-  cat /root/update_repo.sh <<<EOF
+  cd /root/
+  cat > update_repo.sh <<EOF
 #!/bin/bash
 # Simple way to update your repo, can also be used for cron
 # also make sure u didnt enter a password when generating public
