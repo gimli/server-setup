@@ -29,7 +29,6 @@ Tmp_path="Tmp"
 # we dont use this in development mode.
 if [ -f /opt/server-setup/server-setup ]; then
    cd /opt/server-setup
-   git pull
    if [ -f reboot.tmp ]; then
      echo "your system need to reboot, before script can continue."
      echo "if you know what your doing then: rm /opt/server-setup/reboot.tmp"
