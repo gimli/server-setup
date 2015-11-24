@@ -18,4 +18,7 @@ and simply run: server-setup or/an server-setup --help.
 ill keep working on this when i have time and perhaps in the future,
 i can add other distro to. 
 
+you'll proberly gonna find this script abit buggy still, but im working on it.
+and if you have any ideas or any input write me.
+
 Nickless
