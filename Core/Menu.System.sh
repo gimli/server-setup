@@ -133,9 +133,9 @@ if [ $exitstatus = 0 ]; then
                # Download and install deps. for ISPConfig 3
                SetupBasic
                DisableApparmor
-               EnableMySQL
-               EnableApache
+               EnableMYSQL
                EnableDovecot
+               EnableApache
                EnableVirus
                EnableMailman
                EnablePureFTPD
@@ -146,7 +146,6 @@ if [ $exitstatus = 0 ]; then
                EnableFail2ban
                EnableFail2BanRulesDovecot
                EnableISPConfig3
-
                # Install Squirrelmail Webmail
                if (whiptail --backtitle "$back_title" --title "Installer" --yesno "Do you wish to install Squirrelmail Webmail?" 8 78); then
                   EnableSquirrelmail
@@ -223,8 +222,8 @@ if [ $exitstatus = 0 ]; then
                ;;
                8)
                     # Setup Unreal IRCD & Anope Services
-                    EnableUnrealIRCD
-                    EnableAnope
+                    # EnableUnrealIRCD
+                    # EnableAnope
                     # Setup Unreal/Anope End
                ;;
                9)
