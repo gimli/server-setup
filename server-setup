@@ -110,7 +110,38 @@ while [ opt != '' ]
 
         3) clear;
            option_picked "Preparing server, please standby.";
-           sleep 0.5
+           # ISPConfig 3 START
+               SetupBasic
+               DisableApparmor
+               EnableMYSQL
+               EnableDovecot
+               EnableApache
+               EnableVirus
+               EnableMailman
+               EnablePureFTPD
+               EnableQuota
+               EnableBind
+               EnableStats
+               EnableJailkit
+               EnableFail2ban
+               EnableFail2BanRulesDovecot
+               EnableISPConfig3
+             echo -e "${MENU} Install Squirrelmail Webmail?${NORMAL}"
+             read -p "(y/n) " squirrel
+             if [ $squirrel = "y" ]; then
+                EnableSquirrelmail
+             fi
+             echo -e "${MENU} Install RoundCube Webmail?${NORMAL}"
+             read -p "(y/n) " roundcube
+             if [ $roundcube = "y" ]; then
+                EnableRoundcube
+             fi
+             echo -e "${MENU} Install ISPC Clean Theme for ispconfig?${NORMAL}"
+             read -p "(y/n) " theme
+             if [ $theme = "y" ]; then
+                EnableISPC_Clean
+             fi
+           # ISPConfig 3 END
         clear
         EnableQuestions;
         ;;
