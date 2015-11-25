@@ -22,7 +22,7 @@ RED_TEXT=`echo "\033[31m"`
 ENTER_LINE=`echo "\033[33m"`
 
 . /etc/lsb-release
-supported_version=("14.05" "15.04" "15.10")
+supported_version=("14.05" "15.04")
 for i in "${supported_version[@]}"
  do
    if [ "$DISTRIB_RELEASE" = "$i" ]; then
