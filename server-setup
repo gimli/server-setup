@@ -82,4 +82,5 @@ check_webserver
 CheckRoot
 
 # Start Menu System
+exit 0
 EnableQuestions
