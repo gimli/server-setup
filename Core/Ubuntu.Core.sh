@@ -6,8 +6,7 @@
 #
 
 CheckInternet(){
-   echo -e "${MENU} Checking internet access.. ${NORMAL}"
-   echo -en "${MENU} Connecting to google.com.. ${NORMAL}"
+   echo -en "${MENU} Connecting to the internet.. (google.com) ${NORMAL}"
    if ping -c3 google.com > /dev/null;
     then
       echo -e "[${MENU}DONE${NORMAL}]\n"
