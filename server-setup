@@ -155,10 +155,12 @@ while [ opt != '' ]
 
         5)
         clear;
-            echo -e "${MENU}Comming soon..${NORMAL}"
-            echo -e "${MENU}for more info see https://github.com/gimli/server-setup ${NORMAL}"
-            echo -e "${MENU}This will return to the main menu in 10 sec. ${NORMAL}"
-            sleep 10
+            echo -e "${MENU} Comming soon..${NORMAL}"
+            echo -e "${MENU} for more info see https://github.com/gimli/server-setup ${NORMAL}"
+            echo -e "${MENU} This will return to the main menu in 10 sec. ${NORMAL}"
+            echo ""
+            echo -e "${MENU} press any key to return to main menu..${NORMAL}"
+            read DUMMY
         clear;
         EnableQuestions;
         ;;
