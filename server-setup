@@ -157,7 +157,9 @@ while [ opt != '' ]
             EnableQuestions;
             ;;
         4)
+            clear;
             nano /etc/server-setup
+            clear;
         ;;
         5)
         clear;
