@@ -95,7 +95,7 @@ while [ opt != '' ]
             exit;
     else
         case $opt in
-        4) clear;
+        1) clear;
         option_picked "Detecting hostname, please standby.";
         sleep 0.5
         # need new way to check and sed new info
