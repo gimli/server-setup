@@ -158,10 +158,10 @@ while [ opt != '' ]
             ;;
         4)
             clear;
-            nano /etc/server-setup
+            view_config
             clear;
         ;;
-        5)
+        7)
         clear;
             echo -e "${MENU}Comming soon..${NORMAL}"
             echo -e "${MENU}for more info see https://github.com/gimli/server-setup ${NORMAL}"
