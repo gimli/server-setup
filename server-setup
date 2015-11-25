@@ -27,6 +27,14 @@ if [ -f /opt/server-setup/server-setup ]; then
 fi
 
 # Load config values created on first run.
+if [ -f /etc/server-setup.conf ]; then
+   echo "Found config in /etc/server-setup.conf"
+else
+   echo "We are unable to locate config file."
+fi
+exit 0
+
+
 source config.sh
 
 # check for appending commands.
