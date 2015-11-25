@@ -118,7 +118,7 @@ function read_input(){
 		4)	user_info "who" ;;
 		5)	user_info "last" ;;
 		6)	mem_info ;;
-		7)	echo "Bye!"; exit 0 ;;
+		7)	echo "Bye!"; EnableQuestion ;;
 		*)	
 			echo "Please select between 1 to 7 choice only."
 			pause
