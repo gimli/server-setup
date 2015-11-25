@@ -15,11 +15,15 @@ case $ARGS in
        exit 0
   ;;
   --run-uninstall)
-      echo "Uninstalling server-setup, please standby."
-      apt-get purge server-setup
-      rm -rf /opt/server-setup
-      rm /usr/sbin/server-setup
-      exit 0
+      read -p "Are you sure ? (y/n) " do_so
+      if [ $do_so = "y" ]; then
+         echo "Uninstalling server-setup, please standby."
+         apt-get purge server-setup
+         rm -rf /opt/server-setup
+         rm /usr/sbin/server-setup
+         rm /etc/server-setup.conf
+         exit 0
+      fi
   ;;
   #*)
   #    echo "Sorry i didnt understand your command, please try --help for more info."
