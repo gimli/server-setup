@@ -52,14 +52,15 @@ option_picked() {
 # First run creation.
 source /etc/server-setup.conf
 Collect_info() {
+  MY_IP=$(hostname -i)
   if [ $SET_CONFIG = 0 ]; then
     echo -e "${MENU} Your config file needs to be set. so we need you to fill in the needed info. ${NORMAL}"
     echo -e "${MENU} We need to know the following, FQDN / network name / server ip / mysql root password ${NORMAL}"
     echo -e "${MENU} we have detected the following system values, Please edit them if u need. ${NORMAL}"
     echo -e "${MENU} also we need these values to install ISPConfig 3 correct.${NORMAL}"
     echo -e "${MENU} --------------------------------------------------------------------------------${NORMAL}"
-    echo -e "${MENU} FQDN: $HOSTNAMEFQDN - Network Name: $HOSTNAMESHORT ${NORMAL}"
-    echo -e "${MENU} Public IP: $serverIP - MySQL Password: $mysql_pass ${NORMAL}"
+    echo -e "${MENU} FQDN: $HOSTNAME - Network Name: $HOSTNAMESHORT ${NORMAL}"
+    echo -e "${MENU} Public IP: $MY_IP - MySQL Password: xxxxxxxxxx ${NORMAL}"
     echo -e "${MENU} -------------------------------------------------------------------------------- ${NORMAL}"
     echo -e "${MENU} note. When you edit theese setting you will set them system-wide. ${NORMAL}"
     read -p " Do you want to edit current settings? (y/n) " edit
