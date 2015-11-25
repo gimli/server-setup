@@ -31,8 +31,14 @@ if [ -f /etc/server-setup.conf ]; then
    echo "Found config in /etc/server-setup.conf"
 else
    echo "We are unable to locate config file."
+   sleep 0.5
+   echo "Installing config.."
+   ln -s /opt/server-setup/config.sh /etc/server-setup.conf
+   if [ -f /etc/server-setup.conf ]; then
+      echo "New config file have been added."
+      echo "please see /etc/server-setup.conf for more info."
+   fi
 fi
-exit 0
 
 
 source config.sh
