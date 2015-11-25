@@ -95,7 +95,7 @@ while [ opt != '' ]
             exit;
     else
         case $opt in
-        1) clear;
+        4) clear;
         option_picked "Detecting hostname, please standby.";
         sleep 0.5
         # need new way to check and sed new info
@@ -103,7 +103,7 @@ while [ opt != '' ]
         EnableQuestions;
         ;;
 
-        2) clear;
+        1) clear;
             option_picked "Setting up root account, please standby.";
             sleep 0.5
             AllowRootSSH
@@ -111,7 +111,7 @@ while [ opt != '' ]
         EnableQuestions;
             ;;
 
-        3) clear;
+        2) clear;
            option_picked "Checking server, please standby.";
            CheckISPConfig
            # ISPConfig 3 START
@@ -150,13 +150,15 @@ while [ opt != '' ]
         EnableQuestions;
         ;;
 
-        4) clear;
+        3) clear;
             option_picked "Enabling Extra's..";
             EnableExtras;
             clear;
             EnableQuestions;
             ;;
-
+        4)
+            nano /etc/server-setup
+        ;;
         5)
         clear;
             echo -e "${MENU}Comming soon..${NORMAL}"
