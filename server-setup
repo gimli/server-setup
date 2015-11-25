@@ -9,21 +9,10 @@
 #
 # Author: Nickless - Admin@isengard.dk
 #-------------------------------------------------------------------------
-
-# download your own custom sources.list
-sources_link=""
-
-# define engine path
+# define script path
 Core_path="Core"
 ISPConfig_path="ISPConfig"
 Extras_path="Extras"
-Tmp_path="Tmp"
-
-#----------------------------------------------------------------------------#
-#                                                                            #
-# no need to edit anything below                                             #
-#                                                                            #
-#----------------------------------------------------------------------------#
 
 # Ensure we enter correct folder before running script
 # we dont use this in development mode.
