@@ -85,6 +85,8 @@ check_webserver
 clear
 Collect_info
 clear
+CheckInternet
+clear
 EnableQuestions
 while [ opt != '' ]
     do
