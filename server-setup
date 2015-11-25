@@ -25,9 +25,6 @@ Tmp_path="Tmp"
 #                                                                            #
 #----------------------------------------------------------------------------#
 
-# Load config values created on first run.
-source config.sh
-
 # Ensure we enter correct folder before running script
 # we dont use this in development mode.
 if [ -f /opt/server-setup/server-setup ]; then
@@ -39,6 +36,9 @@ if [ -f /opt/server-setup/server-setup ]; then
      exit 0
   fi
 fi
+
+# Load config values created on first run.
+source config.sh
 
 # check for appending commands.
 # like --help or --run-upgrade / --run-uninstall
