@@ -16,7 +16,6 @@ SetupBasic() {
 
    #Synchronize the System Clock
    package_install ntp ntpdate
-
 }
 
 DisableApparmor() {

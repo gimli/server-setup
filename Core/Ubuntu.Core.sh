@@ -90,7 +90,9 @@ AptUpgrade(){
 
 check_webserver(){
    if check_package apache2 = 1; then
-     echo "apache installed"
+      webserver="apache2"
+   else
+      webserver="nginx"
    fi
 }
 

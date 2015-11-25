@@ -74,12 +74,12 @@ for file in $Extras_path/*.sh; do
    source $file
 done
 
-# Check for webserver
-check_webserver
-
 # is root present ?
 # if not kill script ?
 CheckRoot
+
+# determin webserver for some scripts
+check_webserver
 
 # Start Menu System
 exit 0
