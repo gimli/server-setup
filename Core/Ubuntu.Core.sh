@@ -5,10 +5,6 @@
 #
 #
 
-# CheckRoot(){
-#
-# }
-
 CheckInternet(){
 
    # Let's check for internet lets start by
@@ -92,6 +88,18 @@ AptUpgrade(){
   fi
 }
 
+check_webserver(){
+   apache="check_package apache2"
+   nignx="check_package nignx"
+   if [ $apache = 1 ]; then
+      webserver="apache2"
+   elif [ $nignx = 1 ]; then
+      webserver="nginx"
+   else
+      webserver=0
+   fi
+}
+
 package_clean() {
         echo "Cleaning packages, please standby."
 	apt-get -qq clean
@@ -123,10 +131,9 @@ package_upgrade() {
 
 check_package() {
    if dpkg -l $1 2> /dev/null | egrep -q ^ii; then
-     echo "Package $1 is already installed, skipping package.."
+     check_installed=1
    else
-     echo "Package $1 is not installed, installing package.."
-     package_install $1
+     check_installed=0
   fi
 }
 

@@ -74,6 +74,9 @@ for file in $Extras_path/*.sh; do
    source $file
 done
 
+# Check for webserver
+check_webserver
+
 # is root present ?
 # if not kill script ?
 CheckRoot
