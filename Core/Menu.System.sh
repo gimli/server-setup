@@ -30,7 +30,8 @@ for i in "${supported_version[@]}"
       supported="No"
    fi
 done
-
+echo $supported
+exit 0
 EnableQuestions(){
     echo -e "${MENU} Ubuntu Server Automated installer ${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
