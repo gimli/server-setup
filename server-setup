@@ -183,7 +183,7 @@ while [ opt != '' ]
         ;;
         6)
         clear;
-           sh Core/System.Information.sh;
+           #sh Core/System.Information.sh;
         clear;
         EnableQuestions;
         ;;
