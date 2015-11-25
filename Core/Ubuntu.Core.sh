@@ -89,7 +89,7 @@ AptUpgrade(){
 }
 
 check_webserver(){
-   if package_check apache2 = 1; then
+   if check_package apache2 = 1; then
      echo "apache installed"
    fi
 }
@@ -125,9 +125,9 @@ package_upgrade() {
 
 check_package() {
    if dpkg -l $1 2> /dev/null | egrep -q ^ii; then
-     check_installed=1
+     echo 1
    else
-     check_installed=0
+     echo 0
   fi
 }
 
