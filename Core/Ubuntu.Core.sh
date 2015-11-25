@@ -33,6 +33,7 @@ CheckRoot(){
 }
 
 SetNewHostname(){
+   package_install hostname
    echo $HOSTNAMEFQDN > /etc/hostname
    /etc/init.d/hostname.sh restart
    sed -i "/127.0.1.1/a $serverIP $HOSTNAMEFQDN  $HOSTNAMESHORT" /etc/hosts
@@ -41,6 +42,7 @@ SetNewHostname(){
 
 AllowRootSSH(){
    # this needy little script will allow root access
+   package_install ssh openssh-server
    sed -i "s/PermitRootLogin without-password/PermitRootLogin yes/" /etc/ssh/sshd_config
    service ssh restart 
    service sshd restart
@@ -120,7 +122,12 @@ package_upgrade() {
 }
 
 check_package() {
-	dpkg -l $1 2> /dev/null | egrep -q ^ii
+   if dpkg -l $1 2> /dev/null | egrep -q ^ii; then
+     echo "Package $1 is already installed, skipping package.."
+   else
+     echo "Package $1 is not installed, installing package.."
+     package_install $1
+  fi
 }
 
 check_repository() {

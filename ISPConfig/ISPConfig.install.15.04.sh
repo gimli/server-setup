@@ -2,28 +2,20 @@
 
 SetupBasic() {
 
-   AptUpgrade
+   AptUpgrade # needs a new way to recheck if reboot have been made, before continue.
 
-   package_install hostname
-   package_install landscape-common
+   package_install hostname landscape-common
 
    #Set hostname and FQDN
    SetNewHostname
 
-   package_update
-   package_upgrade
-   packages=("vim-nox" "dnsutils" "unzip" "rkhunter" "binutils" "sudo" "bzip2" "zip")
-   for i in ${packages[@]}
-    do
-      package_install $i
-   done
+   package_install vim-nox dnsutils unzip rkhunter binutils sudo bzip2 zip)
 
    echo "dash dash/sh boolean false" | debconf-set-selections
    dpkg-reconfigure -f noninteractive dash > /dev/null 2>&1
 
    #Synchronize the System Clock
-   package_install ntp 
-   package_install ntpdate
+   package_install ntp ntpdate
 
 }
 
@@ -32,30 +24,20 @@ DisableApparmor() {
    if [ -f /etc/init.d/apparmor ]; then
      /etc/init.d/apparmor stop
      update-rc.d -f apparmor remove
-     packages=("remove" "apparmor" "apparmor-utils")
-     for i in ${packages[@]}
-      do
-        package_uninstall $i
-     done
+     packages_uninstall remove apparmor apparmor-utils
      rm /etc/init.d/apparmor
   fi
 }
 
 EnableMYSQL() {
-   package_update
-   package_upgrade
-   package_install software-properties-common 
-   package_install python-software-properties
+   package_install software-properties-common python-software-properties
 
    echo "mysql-server mysql-server/root_password password $mysql_pass" | debconf-set-selections
    echo "mysql-server mysql-server/root_password_again password $mysql_pass" | debconf-set-selections
 
    package_install mariadb-server
-   package_install mariadb-client
-   package_install php5-cli 
-   package_install php5-mysqlnd 
-   package_install php5-mcrypt 
-   package_install mcrypt
+   package_install mariadb-client 
+   package_install php5-cli php5-mysqlnd php5-mcrypt mcrypt
 
    #Allow MySQL to listen on all interfaces
    cp /etc/mysql/mariadb.conf.d/mysqld.cnf /etc/mysql/mariadb.conf.d/mysqld.cnf.backup
@@ -68,13 +50,7 @@ EnableDovecot(){
    echo "postfix postfix/mailname string $HOSTNAMEFQDN" | debconf-set-selections
 
    service sendmail stop; update-rc.d -f sendmail remove
-   package_update
-   package_upgrade
-   packages=("postfix" "postfix-mysql" "postfix-doc" "openssl" "getmail4" "dovecot-imapd" "dovecot-pop3d" "dovecot-mysql" "dovecot-sieve") 
-   for i in ${packages[@]}
-    do
-      package_install $i
-   done
+   package_install postfix postfix-mysql postfix-doc openssl getmail4 dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve 
 
    cp /etc/postfix/master.cf /etc/postfix/master.cf.backup
    sed -i 's|#submission inet n       -       -       -       -       smtpd|submission inet n       -       -       -       -       smtpd|' /etc/postfix/master.cf
@@ -92,13 +68,7 @@ EnableDovecot(){
 }
 
 EnableVirus() {
-   package_update
-   package_upgrade
-   packages=("amavisd-new" "spamassassin" "clamav" "clamav-daemon" "zoo" "unzip" "bzip2" "arj" "nomarch" "lzop" "cabextract" "apt-listchanges" "libnet-ldap-perl" "libauthen-sasl-perl" "clamav-docs" "daemon" "libio-string-perl" "libio-socket-ssl-perl" "libnet-ident-perl" "zip" "libnet-dns-perl" "heirloom-mailx")
-   for i in ${packages[@]}
-    do
-      package_install $i
-   done
+   packages_install amavisd-new spamassassin clamav clamav-daemon zoo unzip bzip2 arj nomarch lzop cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl heirloom-mailx
    service spamassassin stop
    update-rc.d -f spamassassin remove
 
@@ -154,13 +124,7 @@ EnableApache() {
    #echo 'phpmyadmin      phpmyadmin/dbconfig-reinstall   boolean false' | debconf-set-selections
    #echo 'phpmyadmin      phpmyadmin/dbconfig-install     boolean false' | debconf-set-selections
 
-   package_update
-   packages_upgrade
-   packages=("apache2" "apache2-doc" "apache2-utils" "libapache2-mod-php5" "php5" "php5-common" "php5-gd php5-mysql" "php5-imap" "phpmyadmin" "php5-cli" "php5-cgi" "libapache2-mod-fcgid" "apache2-suexec" "php-pear" "php-auth" "php5-mcrypt" "mcrypt" "php5-imagick" "imagemagick" "libapache2-mod-suphp" "libruby" "libapache2-mod-python" "php5-curl" "php5-intl" "php5-memcache" "php5-memcached" "php5-ming" "php5-ps" "php5-pspell" "php5-recode" "php5-snmp" "php5-sqlite" "php5-tidy" "php5-xmlrpc" "php5-xsl" "memcached")
-   for i in ${packages[@]}
-    do
-      package_install $i
-   done
+   package_install apache2 apache2-doc apache2-utils libapache2-mod-php5 php5 php5-common php5-gd php5-mysql php5-imap phpmyadmin php5-cli php5-cgi libapache2-mod-fcgid apache2-suexec php-pear php-auth php5-mcrypt mcrypt php5-imagick imagemagick libapache2-mod-suphp libruby libapache2-mod-python php5-curl php5-intl php5-memcache php5-memcached php5-ming php5-ps php5-pspell php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl memcached
 
    a2enmod suexec rewrite ssl actions include
    a2enmod dav_fs dav auth_digest
@@ -190,7 +154,7 @@ EOF
    sed -i 's|application/x-ruby|#application/x-ruby|' /etc/mime.types
 
    #Install X-Cache
-   apt-get -y install php5-xcache
+   package_install php5-xcache
    service apache2 restart
 }
 
@@ -206,7 +170,6 @@ EnableMailman() {
    read DUMMY
 
    #Install Mailman
-   package_update
    package_install mailman
    newlist mailman
 
@@ -236,10 +199,7 @@ EOF
 
 EnablePureFTPD() {
    #Install PureFTPd
-   package_update
-   package_upgrade
-   package_install pure-ftpd-common 
-   package_install pure-ftpd-mysql
+   package_install pure-ftpd-common pure-ftpd-mysql
 
    #Setting up Pure-Ftpd
    sed -i 's/VIRTUALCHROOT=false/VIRTUALCHROOT=true/' /etc/default/pure-ftpd-common
@@ -271,9 +231,7 @@ EnableQuota() {
    sed -i "s/errors=remount-ro/errors=remount-ro,usrjquota=quota.user,grpjquota=quota.group,jqfmt=vfsv0/" /etc/fstab
 
    #Setting up Quota
-   package_update
-   package_install quota 
-   package_install quotatool
+   package_install quota quotatool
    mount -o remount /
    quotacheck -avugm
    quotaon -avug
@@ -281,16 +239,11 @@ EnableQuota() {
 
 EnableBind() {
    #Install BIND DNS Server
-  package_install bind9 
-  package_install dnsutils
+  package_install bind9 dnsutils
 }
 
 EnableStats() {
-   packages=("vlogger" "webalizer" "awstats" "geoip-database" "libclass-dbi-mysql-perl")
-   for i in ${packages[@]}
-    do
-      package_install $i
-   done
+   package_install vlogger webalizer awstats geoip-database libclass-dbi-mysql-perl
 
    sed -i "s/MAILTO=root/#MAILTO=root/" /etc/cron.d/awstats
    sed -i 's|*/10|#*/10|' /etc/cron.d/awstats
@@ -298,13 +251,7 @@ EnableStats() {
 }
 
 EnableJailkit() {
-   package_update
-   package_upgrade
-   packages=("build-essential" "autoconf" "automake1.9" "libtool" "flex" "bison" "debhelper" "binutils-gold")
-   for i in ${packages[@]}
-    do
-      package_install $i
-   done
+   package_install build-essential autoconf automake1.9 libtool flex bison debhelper binutils-gold
 
    cd /tmp
    wget http://olivier.sessink.nl/jailkit/jailkit-2.17.tar.gz
