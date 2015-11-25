@@ -9,7 +9,7 @@ SetupBasic() {
    #Set hostname and FQDN
    SetNewHostname
 
-   package_install vim-nox dnsutils unzip rkhunter binutils sudo bzip2 zip)
+   package_install vim-nox dnsutils unzip rkhunter binutils sudo bzip2 zip
 
    echo "dash dash/sh boolean false" | debconf-set-selections
    dpkg-reconfigure -f noninteractive dash > /dev/null 2>&1

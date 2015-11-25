@@ -89,14 +89,8 @@ AptUpgrade(){
 }
 
 check_webserver(){
-   apache="check_package apache2"
-   nignx="check_package nignx"
-   if [ $apache = 1 ]; then
-      webserver="apache2"
-   elif [ $nignx = 1 ]; then
-      webserver="nginx"
-   else
-      webserver=0
+   if package_check apache2 = 1; then
+     echo "apache installed"
    fi
 }
 
