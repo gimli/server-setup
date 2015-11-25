@@ -20,6 +20,8 @@ NUMBER=`echo "\033[33m"` #yellow
 FGRED=`echo "\033[41m"`
 RED_TEXT=`echo "\033[31m"`
 ENTER_LINE=`echo "\033[33m"`
+
+. /etc/lsb-release
 supported_version=("14.05" "15.04" "15.10")
 for i in "${supported_version[@]}"
  do
