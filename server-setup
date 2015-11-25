@@ -111,7 +111,6 @@ while [ opt != '' ]
         3) clear;
            option_picked "Checking server, please standby.";
            CheckISPConfig
-           exit 0
            # ISPConfig 3 START
                SetupBasic
                DisableApparmor
