@@ -24,6 +24,7 @@ case $ARGS in
          rm /etc/server-setup.conf
          exit 0
       fi
+      exit 0
   ;;
   #*)
   #    echo "Sorry i didnt understand your command, please try --help for more info."
