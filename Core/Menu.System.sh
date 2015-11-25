@@ -104,8 +104,8 @@ EnableExtras()
          echo -e "${ENTER_LINE}Please enter a menu option and enter. ${NORMAL}"
          read subopt2
          case $subopt2 in
-           1) clear;echo "hello";sleep 10;clear ;;
-           2) clear;echo "hello2#";sleep 10;clear ;;
+           1) clear;EnableOpenVPN;EnableHavp;EnableProxy;clear ;;
+           2) clear;EnableMunin;EnableMonit;clear ;;
            3) clear;apt-get update | sh test2.sh "Updating sources";clear;;
            e) clear;exit 0 ;;
          esac
