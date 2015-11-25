@@ -8,7 +8,7 @@
 #--------------------------------------------------#
 
 # Enable Config
-SET_CONFIG=0
+SET_CONFIG=1
 
 # this will override whiptail questions
 # and Manual setup values.
