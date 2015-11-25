@@ -156,7 +156,7 @@ while [ opt != '' ]
             clear;
             EnableQuestions;
             ;;
-        4)
+        f)
             clear;
             view_config
             clear;
