@@ -6,7 +6,7 @@
 #
 
 CheckInternet(){
-
+   echo -n "Connecting to google.com.. "
    # Let's check for internet lets start by
    # Connecting whit google.com
    if ping -c3 google.com > /dev/null;
