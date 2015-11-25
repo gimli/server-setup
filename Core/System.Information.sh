@@ -126,12 +126,12 @@ function read_input(){
 }
  
 # ignore CTRL+C, CTRL+Z and quit singles using the trap
-trap '' SIGINT SIGQUIT SIGTSTP
+#trap '' SIGINT SIGQUIT SIGTSTP
  
 # main logic
-while true
-do
-	clear
- 	show_menu	# display memu
- 	read_input  # wait for user input
-done
+#while true
+#do
+#	clear
+# 	show_menu	# display memu
+# 	read_input  # wait for user input
+#done
