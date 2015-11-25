@@ -31,6 +31,7 @@ EnableQuestions(){
     echo -e "${MENU} for more info about this script see http://github.com/gimli/server-setup/${NORMAL}"
     echo -e "${MENU} please post any issuses and idea's on the page above..${NORMAL}"
     echo -e ""
+    echo -e "${MENU} Your System: DISTRIB_DESCRIPTION ($DISTRIB_CODENAME) ${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${MENU}**${NUMBER} 1)${MENU} Allow Root SSH Access. ${NORMAL}"
     echo -e "${MENU}**${NUMBER} 2)${MENU} Install ISPConfig 3. ${NORMAL}"
