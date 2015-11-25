@@ -40,7 +40,7 @@ else
    fi
 fi
 
-
+# load config values before the rest of the script.
 source config.sh
 
 # check for appending commands.

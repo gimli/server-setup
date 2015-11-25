@@ -11,6 +11,8 @@ case $ARGS in
   --run-upgrade)
        echo "Updating script..."
        cd /opt/server-setup
+       git add .
+       git commit -a -m 'pull it all together, and upgrade.'
        git pull
        exit 0
   ;;
@@ -19,9 +21,8 @@ case $ARGS in
       if [ $do_so = "y" ]; then
          echo "Uninstalling server-setup, please standby."
          apt-get purge server-setup
-         rm -rf /opt/server-setup
-         rm /usr/sbin/server-setup
-         rm /etc/server-setup.conf
+         cd ~/
+         clear
          exit 0
       fi
       exit 0
