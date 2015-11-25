@@ -22,9 +22,9 @@ RED_TEXT=`echo "\033[31m"`
 ENTER_LINE=`echo "\033[33m"`
 
 supported_version=("15.04")
-for i in ${supported_version[@]}
+for i in "${supported_version[@]}"
  do
-   if [ $DISTRIB_RELEASE = $i ]; then
+   if [ "$DISTRIB_RELEASE" = "$i" ]; then
       supported="Yes"
    else
       supported="No"
