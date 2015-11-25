@@ -125,9 +125,9 @@ package_upgrade() {
 
 check_package() {
    if dpkg -l $1 2> /dev/null | egrep -q ^ii; then
-     echo 1
+     check_packages = 1
    else
-     echo 0
+     check_packages = 0
   fi
 }
 
