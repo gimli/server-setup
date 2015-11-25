@@ -26,6 +26,8 @@ for i in ${supported_version[@]}
  do
    if [ $DISTRIB_RELEASE = $i ]; then
       supported="Yes"
+   else
+      supported="No"
    fi
 done
 
