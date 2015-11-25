@@ -22,17 +22,12 @@ RED_TEXT=`echo "\033[31m"`
 ENTER_LINE=`echo "\033[33m"`
 
 . /etc/lsb-release
-supported_version=("14.05" "15.04")
-for i in "${supported_version[@]}"
- do
-   if [ "$DISTRIB_RELEASE" = "$i" ]; then
-      supported="Yes"
-   else
-      supported="No"
-   fi
-done
-echo "Version: $DISTRIB_RELEASE - $supported"
-exit 0
+if [ $DISTRIB_RELEASE = "15.04" ]; then
+   supported="Yes"
+else
+   supported="No"
+fi
+
 EnableQuestions(){
     echo -e "${MENU} Ubuntu Server Automated installer ${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
