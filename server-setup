@@ -172,6 +172,29 @@ while [ opt != '' ]
         clear;
         EnableQuestions;
         ;;
+        4)
+        clear;
+           cd /opt/server-setup
+           git add .
+           git commit -a -m 'updating..'
+           git pull
+        clear;
+        EnableQuestions
+        ;;
+        5)
+        clear;
+             cat /etc/server-setup.conf
+             echo -e "${MENU}Press any key to continue.. ${NORMAL}"
+             read DUMMY
+        clear;
+        EnableQuestions;
+        ;;
+        6)
+        clear;
+           system_specs;
+        clear;
+        EnableQuestions;
+        ;;
         x)exit;
         ;;
 
