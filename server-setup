@@ -82,5 +82,64 @@ CheckRoot
 check_webserver
 
 # Start Menu System
-exit 0
+clear
+Collect_info
+clear
 EnableQuestions
+while [ opt != '' ]
+    do
+    if [[ $opt = "" ]]; then 
+            exit;
+    else
+        case $opt in
+        1) clear;
+        option_picked "Detecting hostname, please standby.";
+        sleep 0.5
+        # need new way to check and sed new info
+        clear;
+        EnableQuestions;
+        ;;
+
+        2) clear;
+            option_picked "Setting up root account, please standby.";
+            sleep 0.5
+            AllowRootSSH
+        clear;
+        EnableQuestions;
+            ;;
+
+        3) clear;
+           option_picked "Preparing server, please standby.";
+           sleep 0.5
+        clear
+        EnableQuestions;
+        ;;
+
+        4) clear;
+            option_picked "Enabling Extra's..";
+            EnableExtras;
+            clear;
+            EnableQuestions;
+            ;;
+
+        5)
+        clear;
+            echo -e "${MENU}Comming soon..${NORMAL}"
+            echo -e "${MENU}for more info see https://github.com/gimli/server-setup ${NORMAL}"
+            echo -e "${MENU}This will return to the main menu in 10 sec. ${NORMAL}"
+            sleep 10
+        clear;
+        EnableQuestions;
+        ;;
+        x)exit;
+        ;;
+
+        \n)exit;
+        ;;
+
+        *)clear;
+        EnableQuestions;
+        ;;
+    esac
+fi
+done
