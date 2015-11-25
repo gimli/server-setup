@@ -41,6 +41,8 @@ AllowRootSSH(){
    service ssh restart 
    service sshd restart
    passwd root
+   echo -e "${MENU} press any key to continue.. ${NORMAL}"
+   read DUMMY
 }
 
 InstallSources(){
