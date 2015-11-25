@@ -174,12 +174,9 @@ while [ opt != '' ]
         ;;
         4)
         clear;
-           cd /opt/server-setup
-           git add .
-           git commit -a -m 'updating..'
-           git pull
+           server-setup --run-upgrade
         clear;
-        EnableQuestions
+        EnableQuestions;
         ;;
         5)
         clear;
