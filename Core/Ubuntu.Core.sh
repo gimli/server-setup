@@ -6,14 +6,13 @@
 #
 
 CheckInternet(){
+   echo "Checking internet access.. "
    echo -n "Connecting to google.com.. "
-   # Let's check for internet lets start by
-   # Connecting whit google.com
    if ping -c3 google.com > /dev/null;
     then
-      echo -e "[${green}DONE${NC}]\n"
+      echo -e "[${MENU}DONE${NORMAL}]\n"
    else
-      echo -e "[${red}failed${NC}]\n"
+      echo -e "[${RED}failed${NC}]\n"
       exit 1
    fi
 }
