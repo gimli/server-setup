@@ -39,7 +39,7 @@ if [ $exitstatus = 0 ]; then
     status="0"
     while [ "$status" -eq 0 ]
     do
-
+      if [ $SET_CONFIG = 0 ]; then
        # Lets make sure we only collect info once while script is running
        # since its working whit loop
        if [ ! $collect_info ]; then
@@ -98,8 +98,9 @@ if [ $exitstatus = 0 ]; then
 
         
 
-        # Only collect information once while script is running
-        collect_info=1
+         # Only collect information once while script is running
+         collect_info=1
+        fi
        fi
 
         # Main Engine - Complete Menu System for the hole script
