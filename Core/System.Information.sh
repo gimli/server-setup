@@ -118,20 +118,9 @@ function read_input(){
 		4)	user_info "who" ;;
 		5)	user_info "last" ;;
 		6)	mem_info ;;
-		7)	echo "Bye!"; EnableQuestion ;;
+		7)	echo "Bye!"; exitstatus=1 ;;
 		*)	
 			echo "Please select between 1 to 7 choice only."
 			pause
 	esac
 }
- 
-# ignore CTRL+C, CTRL+Z and quit singles using the trap
-#trap '' SIGINT SIGQUIT SIGTSTP
- 
-# main logic
-#while true
-#do
-#	clear
-# 	show_menu	# display memu
-# 	read_input  # wait for user input
-#done

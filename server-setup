@@ -186,7 +186,7 @@ while [ opt != '' ]
           # ignore CTRL+C, CTRL+Z and quit singles using the trap
           trap '' SIGINT SIGQUIT SIGTSTP
           # main logic
-          while true
+          while exitstatus=0
           do
             clear
             show_menu       # display memu
