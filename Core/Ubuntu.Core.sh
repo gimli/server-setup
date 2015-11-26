@@ -27,11 +27,19 @@ CheckRoot(){
 }
 
 SetNewHostname(){
+ if [ ! /tmp/reboot_hostname ];
    package_install hostname
    echo $HOSTNAMEFQDN > /etc/hostname
    /etc/init.d/hostname.sh restart
    sed -i "/127.0.1.1/a $serverIP $HOSTNAMEFQDN  $HOSTNAMESHORT" /etc/hosts
    sed -i "/127.0.1.1/d" /etc/hosts
+   echo -e "${MENU} the system needs to reboot, please re-run the script when rebooted.${NORMAL}"
+   echo -e "${MENU} press any key to continue. ${NORMAL}"
+   read DUMMY
+   touch /tmp/reboot_hostname
+   echo 1 > /tmp/reboot_hostname
+   reboot
+ fi
 }
 
 AllowRootSSH(){

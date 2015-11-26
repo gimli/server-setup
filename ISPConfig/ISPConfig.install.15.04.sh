@@ -2,12 +2,14 @@
 
 SetupBasic() {
 
+   SetNewHostname
+
    AptUpgrade # needs a new way to recheck if reboot have been made, before continue.
 
    package_install hostname landscape-common
 
    #Set hostname and FQDN
-   SetNewHostname
+   #SetNewHostname
 
    package_install vim-nox dnsutils unzip rkhunter binutils sudo bzip2 zip
 
